@@ -358,6 +358,9 @@ class Cognito:
             }
         }
         """
+        _old_username = self.username
+        self.username = username
+        
         if self.base_attributes is None:
             attributes = {}
         else:
@@ -379,6 +382,7 @@ class Cognito:
         self._set_attributes(response, attributes)
 
         response.pop("ResponseMetadata")
+        self.username = _old_username
         return response
 
     def admin_confirm_sign_up(self, username=None):
